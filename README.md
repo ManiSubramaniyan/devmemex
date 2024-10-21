@@ -31,4 +31,7 @@ Some examples:
 
 For the block operations (s,p,i), memcpy library function is used. The expectation is that the library memcpy is more efficient and can take care of newer CPU features such as movdir64b.
 
-                                                  
+TODO/Known issues:
+1. Parsing can be improved a bit. For e.g. the attribute 'n' (no verify) can only be given as the second letter. For e.g. 'dn' is valid but 'nd' is not valid.
+2. Not written for performance at all; for e.g. for block operations device memory is only read/written to in multiples of 128B at a time.
+3. Init input is only taken in as hex word values; for supporting other formats, have to change the code.
