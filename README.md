@@ -31,6 +31,9 @@ Some examples:
 
 For the block operations (s,p,i), memcpy library function is used. The expectation is that the library memcpy is more efficient and can take care of newer CPU features such as movdir64b.
 
+Additional Implementation notes:
+1. The block operation(s/p/i) size is used for the number of pages mapped by mmap. Mmap gives back mapping even if the target object size (e.g. device BAR size) is less than the requested block pages, but takes care for the boundary (read mmap documentation for reference). Devmemex does not check for this block size more than the target size (cannot) but this does not result in anything bad (extra block input is ignored, no corruption, etc)
+   
 TODO/Known issues:
 1. Parsing can be improved a bit. For e.g. the attribute 'n' (no verify) can only be given as the second letter. For e.g. 'dn' is valid but 'nd' is not valid.
 2. Not written for performance at all; for e.g. for block operations device memory is only read/written to in multiples of 128B at a time.
